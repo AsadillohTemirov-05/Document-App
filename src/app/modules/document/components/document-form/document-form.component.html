@@ -1,0 +1,80 @@
+<h2 mat-dialog-title>Реквизиты входящего документа</h2>
+
+<form [formGroup]="documentForm" class="form-grid">
+
+  <div class="form-col">
+    <mat-form-field appearance="fill">
+      <mat-label>Рег. № <span class="required">*</span></mat-label>
+      <input matInput formControlName="regNumber">
+    </mat-form-field>
+    
+    
+    <mat-form-field appearance="fill">
+      <mat-label>№ исх. док-та</mat-label>
+      <input matInput formControlName="outNumber">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Форма доставки</mat-label>
+      <mat-select formControlName="deliveryMethod">
+        <mat-option value="Курьер">Курьер</mat-option>
+        <mat-option value="Email">Email</mat-option>
+        <mat-option value="Телефонограмма">Телефонограмма</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Тема <span class="required">*</span></mat-label>
+      <input matInput formControlName="topic" maxlength="100">
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="access">Доступ</mat-slide-toggle>
+    <mat-slide-toggle formControlName="control">Контроль</mat-slide-toggle>
+  </div>
+
+  <div class="form-col">
+    <mat-form-field appearance="fill">
+      <mat-label>Дата рег. <span class="required">*</span></mat-label>
+      <input matInput [value]="documentForm.get('regDate')?.value | date:'yyyy-MM-dd'" disabled>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Дата исх. док-та</mat-label>
+      <input matInput [matDatepicker]="outPicker" formControlName="outDate">
+      <mat-datepicker-toggle matSuffix [for]="outPicker"></mat-datepicker-toggle>
+      <mat-datepicker #outPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Корреспондент <span class="required">*</span></mat-label>
+      <mat-select formControlName="correspondent">
+        <mat-option value="ЦБ">ЦБ</mat-option>
+        <mat-option value="ГНИ">ГНИ</mat-option>
+        <mat-option value="ТСЖ">ТСЖ</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Срок исполнения</mat-label>
+      <input matInput [matDatepicker]="execPicker" formControlName="executionDate">
+      <mat-datepicker-toggle matSuffix [for]="execPicker"></mat-datepicker-toggle>
+      <mat-datepicker #execPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Описание</mat-label>
+      <textarea matInput formControlName="description" maxlength="1000"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="file-upload">
+    <label>Файл (PDF/DOC/DOCX до 1Мб):</label>
+    <input type="file" (change)="onFileSelected($event)">
+    <div class="error" *ngIf="fileError">{{ fileError }}</div>
+  </div>
+
+  <div class="form-actions">
+    <button mat-raised-button color="primary" (click)="save()">Сохранить</button>
+    <button mat-raised-button color="warn" (click)="close()">Закрыть</button>
+  </div>
+</form>

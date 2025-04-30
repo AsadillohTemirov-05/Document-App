@@ -1,0 +1,82 @@
+.document-list {
+  padding: 24px;
+
+  h2 {
+    margin-bottom: 16px;
+    font-size: 22px;
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+
+    button {
+      white-space: nowrap;
+    }
+  }
+
+  table {
+    width: 100%;
+    font-size: 14px;
+
+    th,
+    td {
+      text-align: left;
+      word-break: break-word;
+    }
+  }
+
+  button {
+    mat-icon {
+      vertical-align: middle;
+    }
+  }
+
+  // ✅ Responsive rules
+  @media screen and (max-width: 768px) {
+    padding: 16px;
+
+    h2 {
+      font-size: 18px;
+    }
+
+    .toolbar {
+      flex-direction: column;
+      align-items: flex-start;
+
+      button {
+        width: 100%;
+        margin-top: 8px;
+      }
+    }
+
+    // Wrap table in scrollable container
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    table th,
+    table td {
+      padding: 4px 8px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    h2 {
+      font-size: 16px;
+    }
+
+    .toolbar {
+      button {
+        font-size: 12px;
+      }
+    }
+
+    table {
+      font-size: 11px;
+    }
+  }
+}        
